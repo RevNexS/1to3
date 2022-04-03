@@ -1,0 +1,84 @@
+Aim: Exploring and understanding TinyOS computational concepts:- Events, Commands and Task. 
+- nesC model
+- nesC Components
+TinyOS and nesC
+
+Outline
+- Tiny os is a OS made Berkely university in collaboration with other organiszation.
+- It is used in embedded system, in sensors, etc.
+- It is code in NesC. Which is modified version of C. Made to run on very low specification of RAM and CPU.
+-It can run on 1MOP CPU, 8KB Storage , 512byte RAM, and less than 50micro whatt power.
+-It can be used in devices to monitor temperture, humidity, climate etc.
+- It has applications in military, bluetooth devices, microware Os etc.
+-Main components of TinyOS are Packet communication, Routing, Sensing, Actuation, Storage.
+-TinyOS has excessive power saving. It only runs when its has instruction otherwise goes to sleep and try to remain in sleep until waked.
+
+Concurrency Model
+- Tiny Os is based on concurrency model. That is it does not stop insturction. It has events that could be paused and cpu follow other instruction and can come back on first instruction.
+
+Project Update
+-TinyOS has been discounitued in devlopment after 2000 release.
+-TinyProd is a fork of TinyOS and has been continued since.
+
+Compailer
+-TinyOS compiler is based on GCC compiler. But striped. It can be called via TinyOS wrapper ncc.
+
+Devlopment in TinyOS.
+-Has programming language similar to C.
+-Due to limited memory and cpu its hard to code for. Written programs has to be highly optimized.
+
+Concurrency Model
+● Challenge: extreme dynamics and soft real-time requirements
+● Cooperative scheduling
+● Light-weight tasks
+● Split-phase operations: non-blocking requests
+● Built-in atomic sections
+– Limited crossing of module boundaries
+Sources of Concurrency
+● Tasks
+– Deferred computation
+– Run sequential and to completion
+– Do not preempt
+● Events
+– Run to completion, and may preempt tasks and events
+– Origin: hardware interrupts or split-phase completion
+Tasks and Events
+
+● Compilation can examine complete call-graph
+– Remove dead-code
+– Eliminate costly module boundary crossings
+– Inline small functions
+● Back-end C compiler can optimize whole program
+– Perform cross component optimizations
+– Constant propagation, common sub-expression elimination
+● Allows detection of race conditions
+Synchronous and Asynchronous
+
+● Asynchronous code (AC):
+– Code reachable from at least one interrupt handler
+– Events signaled directly or indirectly by hardware interrupts
+● Synchronous code (SC):
+– “Everything else ...”
+– Primarily tasks
+
+
+The nesC Toolchain: nesdoc
+● Generate code documentation using simple tags
+● Same concept as javadoc
+● Can generate a component graph using dot
+The nesC Toolchain: nescc
+
+● Allows integration with Java code
+● Typical use: interact with network through base station
+● ncg - extract constants from nesC files
+– Generates class that contains constants
+● mig - message interface generator for nesC
+– Generates class that encodes and decodes messages
+Issues for nesC
+
+Conclusions for nesC
+● Bidirectional interfaces fit the TinyOS model
+● Components are a good abstraction
+● Concurrency model meets requirements in applications
+● The restrictions in nesC introduce practical problems
+● Not limited to the domain of embedded system
