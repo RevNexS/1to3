@@ -1,0 +1,44 @@
+Aim: Understanding TOSSIM for 
+- Mote-mote radio communication 
+- Mote-PC serial communication 
+
+Introduction:
+TOSSIM is a discrete event simulator for TinyOS sensor networks. Instead of compiling a TinyOS 
+application for a mote, users can compile it into the TOSSIM framework, which runs on a PC. This 
+allows users to debug, test, and analyze algorithms in a controlled and repeatable environment. As 
+TOSSIM runs on a PC, users can examine their TinyOS code using debuggers and other development 
+tools. This document briefly describes the design philosophy of TOSSIM, its capabilities, its structure. 
+It also provides a brief tutorial on how to use TOSSIM for testing or analysis.
+
+Basic Communication Interfaces
+
+-Packets Provides the basic accessors for the message_t abstract data type. This interface provides 
+commands for clearing a message's contents, getting its payload length, and getting a pointer to its 
+payload area
+
+Send - Provides the basic address-free message sending interface. This interface provides 
+commands for sending a message and canceling a pending message send. The interface provides 
+an event to indicate whether a message was sent successfully or not. It also provides convenience 
+functions for getting the message's maximum payload as well as a pointer to a message's payload 
+area.
+
+Receive - Provides the basic message reception interface. This interface provides an event for 
+receiving messages. It also provides, for convenience, commands for getting a message's payload 
+length and getting a pointer to a message's payload area.
+
+PacketAcknowledgements - Provides a mechanism for requesting acknowledgements on a per-packet basis.
+
+Components
+
+A number of components implement the basic communications and active message interfaces. Let's 
+take a look at some of the components in the /tos/system directory. You should be familiar with these 
+components because your code needs to specify both the interfaces your application uses as well as 
+the components which provide (implement) those interfaces:
+
+- AMReceiverC - Provides the following interfaces: Receive, Packet, and AMPacket.
+- AMSenderC - Provides AMSend, Packet, AMPacket, and PacketAcknowledgements as Acks.
+- AMSnooperC - Provides Receive, Packet, and AMPacket.
+- AMSnoopingReceiverC - Provides Receive, Packet, and AMPacket.
+- ActiveMessageAddressC - Provides commands to get and set the node's active message address. 
+This interface is not for general use and changing a node's active message address can break the 
+network stack, so avoid using it unless you know what you are doing.
